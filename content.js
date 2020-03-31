@@ -23,8 +23,8 @@ function replaceText (node) {
 	aux = value.replace(/coronavírus|coronavirus|corona virus|corona vírus|covid-19|covid19|covid/gi, '💉');
 
 	if(value != aux){
-		if(!value.includes("(function")){
-			var count = (value.match(/coronavírus/gi) || []).length;
+		if(!invalidWords(value)){
+			var count = (value.match(/coronavírus|coronavirus|corona virus|corona vírus|covid-19|covid19|covid/gi) || []).length;
 
 			countCoronguinhas += count;
 		}
@@ -33,7 +33,14 @@ function replaceText (node) {
 	node.nodeValue = aux;
 }
 
+function invalidWords(value){
+	var result = /function|meta|\{/.test(value);
+
+	return result;
+}
+
 function setLocalStorage (count) {
+	console.log(countCoronguinhas);
 	chrome.storage.sync.set({total: countCoronguinhas});
 }
 
