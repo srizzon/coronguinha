@@ -20,7 +20,7 @@ function findAndReplace(){
 function replaceText (node) {
 	let value = node.nodeValue;
 
-	aux = value.replace(/coronavírus/gi, '💉');
+	aux = value.replace(/coronavírus|coronavirus|corona virus|corona vírus|covid-19|covid19|covid/gi, '💉');
 
 	if(value != aux){
 		if(!value.includes("(function")){
